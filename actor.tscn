@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d10mbmyuev2py"]
+
+[ext_resource type="Script" path="res://actor.gd" id="1_kuvtx"]
+
+[node name="Actor" type="CharacterBody2D"]
+script = ExtResource("1_kuvtx")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Marker2D"]
+root_node = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

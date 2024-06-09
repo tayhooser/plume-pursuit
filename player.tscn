@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3mol1n0qyd6r"]
+
+[ext_resource type="PackedScene" uid="uid://d10mbmyuev2py" path="res://actor.tscn" id="1_8p15k"]
+[ext_resource type="Texture2D" uid="uid://4q5fcb3e3mva" path="res://common/spirit idle.png" id="2_5hykn"]
+[ext_resource type="Script" path="res://player.gd" id="2_siryp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h43t"]
+size = Vector2(22, 28)
+
+[node name="Player" instance=ExtResource("1_8p15k")]
+script = ExtResource("2_siryp")
+acceleration = 0.1
+ground_friction = 0.3
+air_friction = 0.15
+
+[node name="Marker2D" parent="." index="0"]
+position = Vector2(0, -14)
+
+[node name="Sprite2D" parent="Marker2D" index="0"]
+position = Vector2(-5, 0)
+texture = ExtResource("2_5hykn")
+
+[node name="Camera2D" type="Camera2D" parent="." index="1"]
+position = Vector2(0, -14)
+limit_left = 0
+limit_top = 0
+position_smoothing_enabled = true
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_7h43t")
