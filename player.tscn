@@ -1,11 +1,180 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3mol1n0qyd6r"]
+[gd_scene load_steps=28 format=3 uid="uid://c3mol1n0qyd6r"]
 
 [ext_resource type="PackedScene" uid="uid://d10mbmyuev2py" path="res://actor.tscn" id="1_8p15k"]
-[ext_resource type="Texture2D" uid="uid://4q5fcb3e3mva" path="res://common/spirit idle.png" id="2_5hykn"]
 [ext_resource type="Script" path="res://player.gd" id="2_siryp"]
+[ext_resource type="Texture2D" uid="uid://b3d581ndg41sh" path="res://common/BODY SPRITESHEET.png" id="3_536ow"]
+[ext_resource type="Texture2D" uid="uid://8mu56mirvelv" path="res://common/spirit head.png" id="4_toh6w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7h43t"]
 size = Vector2(22, 28)
+
+[sub_resource type="Animation" id="Animation_78e3s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeadMarker/head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_12v55"]
+resource_name = "bite"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeadMarker/head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1, 0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 0]
+}
+
+[sub_resource type="Animation" id="Animation_3c0sl"]
+resource_name = "run"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_jneh1"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_col31"]
+resource_name = "falling"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7vtmf"]
+_data = {
+"RESET": SubResource("Animation_78e3s"),
+"bite": SubResource("Animation_12v55"),
+"falling": SubResource("Animation_col31"),
+"idle": SubResource("Animation_jneh1"),
+"run": SubResource("Animation_3c0sl")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dmo4y"]
+animation = &"bite"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mhgwe"]
+animation = &"falling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_csjf6"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g50cv"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cptyw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qn5ep"]
+advance_mode = 2
+advance_condition = &"is_running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fq7xn"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hk5yj"]
+advance_mode = 2
+advance_condition = &"bite"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ktkbv"]
+advance_mode = 2
+advance_condition = &"bite"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i2lo1"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w7o1v"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ucwir"]
+advance_mode = 2
+advance_condition = &"is_falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_86y5c"]
+advance_mode = 2
+advance_condition = &"is_falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2e8dw"]
+advance_mode = 2
+advance_condition = &"not_falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xp6yg"]
+advance_mode = 2
+advance_condition = &"not_falling"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rrhuf"]
+states/bite/node = SubResource("AnimationNodeAnimation_dmo4y")
+states/bite/position = Vector2(530, 185)
+states/falling/node = SubResource("AnimationNodeAnimation_mhgwe")
+states/falling/position = Vector2(530, 35)
+states/idle/node = SubResource("AnimationNodeAnimation_csjf6")
+states/idle/position = Vector2(426, 100)
+states/run/node = SubResource("AnimationNodeAnimation_g50cv")
+states/run/position = Vector2(631, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_cptyw"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_qn5ep"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_fq7xn"), "idle", "bite", SubResource("AnimationNodeStateMachineTransition_hk5yj"), "run", "bite", SubResource("AnimationNodeStateMachineTransition_ktkbv"), "bite", "run", SubResource("AnimationNodeStateMachineTransition_i2lo1"), "bite", "idle", SubResource("AnimationNodeStateMachineTransition_w7o1v"), "idle", "falling", SubResource("AnimationNodeStateMachineTransition_ucwir"), "run", "falling", SubResource("AnimationNodeStateMachineTransition_86y5c"), "falling", "run", SubResource("AnimationNodeStateMachineTransition_2e8dw"), "falling", "idle", SubResource("AnimationNodeStateMachineTransition_xp6yg")]
 
 [node name="Player" instance=ExtResource("1_8p15k")]
 script = ExtResource("2_siryp")
@@ -17,15 +186,39 @@ air_friction = 0.15
 position = Vector2(0, -14)
 
 [node name="Sprite2D" parent="Marker2D" index="0"]
-position = Vector2(-5, 0)
-texture = ExtResource("2_5hykn")
+position = Vector2(-30, -21)
+texture = ExtResource("3_536ow")
+centered = false
+hframes = 6
 
-[node name="Camera2D" type="Camera2D" parent="." index="1"]
+[node name="HeadMarker" type="Marker2D" parent="." index="1"]
+
+[node name="head" type="Sprite2D" parent="HeadMarker" index="0"]
+position = Vector2(1, -30)
+texture = ExtResource("4_toh6w")
+centered = false
+hframes = 5
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
 position = Vector2(0, -14)
 limit_left = 0
 limit_top = 0
 position_smoothing_enabled = true
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_7h43t")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_7vtmf")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource("AnimationNodeStateMachine_rrhuf")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/bite = false
+parameters/conditions/idle = false
+parameters/conditions/is_falling = false
+parameters/conditions/is_running = false
+parameters/conditions/not_falling = false
