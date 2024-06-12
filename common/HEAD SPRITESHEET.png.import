@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4q5fcb3e3mva"
-path="res://.godot/imported/spirit idle.png-e53c8e97cfdc0585305f60e8773317cd.ctex"
+uid="uid://cngt7y11xbw86"
+path="res://.godot/imported/HEAD SPRITESHEET.png-ae7e2334ab55a7234c72347f78b3b8ac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/spirit idle.png"
-dest_files=["res://.godot/imported/spirit idle.png-e53c8e97cfdc0585305f60e8773317cd.ctex"]
+source_file="res://common/HEAD SPRITESHEET.png"
+dest_files=["res://.godot/imported/HEAD SPRITESHEET.png-ae7e2334ab55a7234c72347f78b3b8ac.ctex"]
 
 [params]
 

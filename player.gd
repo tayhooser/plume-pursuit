@@ -11,9 +11,11 @@ var can_double_jump := (feathers > 2)
 var can_triple_jump := (feathers > 3)
 var direction
 var prev_direction
+var head_default_position
 
 func _ready():
 	$AnimationTree.active = true
+	head_default_position = $HeadMarker.position
 
 func _physics_process(delta):
 	# gravity
@@ -56,35 +58,44 @@ func _physics_process(delta):
 	
 	# ANIMATION
 	update_animation_parameters()
-	'''
-	if is_on_floor():
-		if direction:
-			#print("Walking animation...")
-			$AnimationPlayer.play("run")
-		else:
-			#print("Idle animation...")
-			#$AnimationPlayer.reset()
-			$AnimationPlayer.play("idle")
-	else:
-		print("Falling animation...")
-		$AnimationPlayer.play("falling")
-	'''
-
 	move_and_slide()
 
 func update_animation_parameters():
 	if is_on_floor():
 		$AnimationTree["parameters/conditions/not_falling"] = true
 		if direction:
-			$AnimationTree["parameters/conditions/idle"] = false
-			$AnimationTree["parameters/conditions/is_running"] = true
+			#$AnimationTree["parameters/conditions/idle"] = false
+			#$AnimationTree["parameters/conditions/is_running"] = true
+			$AnimationPlayer.play("run")
+			var current_frame = $AnimationPlayer.current_animation_position
+			#print(round(current_frame * 10.0) / 10.0)
+			print(direction)
+			match round(current_frame * 10.0) / 10.0:
+				0.0:
+					# up 2 right 1
+					$HeadMarker.position = head_default_position + Vector2(direction,-2)
+				0.1:
+					# up 1 right 1
+					$HeadMarker.position = head_default_position + Vector2(direction,-1)
+				0.2:
+					$HeadMarker.position = head_default_position
+				0.3:
+					# up 1
+					$HeadMarker.position = head_default_position + Vector2(0,-1)
+				0.4:
+					# up 3
+					$HeadMarker.position = head_default_position + Vector2(0,-3)
 		else:
-			$AnimationTree["parameters/conditions/idle"] = true
-			$AnimationTree["parameters/conditions/is_running"] = false
+			$AnimationPlayer.play("idle")
+			$HeadMarker.position = head_default_position
+			#$AnimationTree["parameters/conditions/idle"] = true
+			#$AnimationTree["parameters/conditions/is_running"] = false
 	else:
-		$AnimationTree["parameters/conditions/not_falling"] = false
-		$AnimationTree.get("parameters/playback").travel("falling")
+		$AnimationPlayer.play("falling")
+		#$AnimationTree["parameters/conditions/not_falling"] = false
+		#$AnimationTree.get("parameters/playback").travel("falling")
 		
 	if Input.is_action_just_pressed("bite"):
 		print("bite")
-		$AnimationTree.get("parameters/playback").travel("bite")
+		$HeadAnimationPlayer.stop()
+		$HeadAnimationPlayer.play("bite")
