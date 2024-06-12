@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c3mol1n0qyd6r"]
+[gd_scene load_steps=27 format=3 uid="uid://c3mol1n0qyd6r"]
 
 [ext_resource type="PackedScene" uid="uid://d10mbmyuev2py" path="res://actor.tscn" id="1_8p15k"]
 [ext_resource type="Script" path="res://player.gd" id="2_siryp"]
@@ -81,6 +81,21 @@ _data = {
 "run": SubResource("Animation_3c0sl")
 }
 
+[sub_resource type="Animation" id="Animation_7c6s3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HeadMarker/head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_emg62"]
 resource_name = "bite"
 length = 0.5
@@ -97,8 +112,26 @@ tracks/0/keys = {
 "values": [1, 2, 3, 4, 0]
 }
 
-[sub_resource type="Animation" id="Animation_7c6s3"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_x2i7b"]
+resource_name = "head_run"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HeadMarker/head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_aedyw"]
+resource_name = "idle"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -115,7 +148,9 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_44l35"]
 _data = {
 "RESET": SubResource("Animation_7c6s3"),
-"bite": SubResource("Animation_emg62")
+"bite": SubResource("Animation_emg62"),
+"head_run": SubResource("Animation_x2i7b"),
+"idle": SubResource("Animation_aedyw")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mhgwe"]
@@ -170,12 +205,14 @@ ground_friction = 0.3
 air_friction = 0.15
 
 [node name="HeadMarker" type="Marker2D" parent="." index="0"]
+position = Vector2(0, -3)
 
 [node name="head" type="Sprite2D" parent="HeadMarker" index="0"]
 position = Vector2(1, -30)
 texture = ExtResource("3_30ryd")
 centered = false
 hframes = 5
+vframes = 2
 
 [node name="Marker2D" parent="." index="1"]
 position = Vector2(0, -14)
@@ -214,3 +251,5 @@ parameters/conditions/idle = false
 parameters/conditions/is_falling = false
 parameters/conditions/is_running = false
 parameters/conditions/not_falling = false
+
+[connection signal="animation_finished" from="HeadAnimationPlayer" to="." method="_on_head_animation_player_animation_finished"]

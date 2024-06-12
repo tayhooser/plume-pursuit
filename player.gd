@@ -12,6 +12,7 @@ var can_triple_jump := (feathers > 3)
 var direction
 var prev_direction
 var head_default_position
+var is_biting := false
 
 func _ready():
 	$AnimationTree.active = true
@@ -55,47 +56,58 @@ func _physics_process(delta):
 			velocity.x = lerp(velocity.x, 0.0, ground_friction)
 		else:
 			velocity.x = lerp(velocity.x, 0.0, air_friction)
-	
-	# ANIMATION
 	update_animation_parameters()
 	move_and_slide()
 
 func update_animation_parameters():
 	if is_on_floor():
-		$AnimationTree["parameters/conditions/not_falling"] = true
 		if direction:
-			#$AnimationTree["parameters/conditions/idle"] = false
-			#$AnimationTree["parameters/conditions/is_running"] = true
+			if not is_biting:
+				# bug: head sprite is off by 1 when running?
+				$HeadMarker.position = head_default_position + Vector2(-direction, 0)
+				$HeadAnimationPlayer.play("head_run")
+				# sync up with body
+				var current_frame = $AnimationPlayer.current_animation_position
+				$HeadAnimationPlayer.seek(current_frame)
+			else:
+				var current_frame = $AnimationPlayer.current_animation_position
+				#print(typeof(floor(current_frame * 10.0)))
+				match int(floor(current_frame * 10.0)):
+					0:
+						# up 2 right 1
+						print(0)
+						$HeadMarker.position = head_default_position + Vector2(direction,-2)
+					1:
+						print(1)
+						# up 1 right 1
+						$HeadMarker.position = head_default_position + Vector2(direction,-1)
+					2:
+						print(2)
+						$HeadMarker.position = head_default_position
+					3:
+						print(3)
+						# up 1
+						$HeadMarker.position = head_default_position + Vector2(0,-1)
+					4:
+						print(4)
+						# up 3
+						$HeadMarker.position = head_default_position + Vector2(0,-3)
 			$AnimationPlayer.play("run")
-			var current_frame = $AnimationPlayer.current_animation_position
-			#print(round(current_frame * 10.0) / 10.0)
-			print(direction)
-			match round(current_frame * 10.0) / 10.0:
-				0.0:
-					# up 2 right 1
-					$HeadMarker.position = head_default_position + Vector2(direction,-2)
-				0.1:
-					# up 1 right 1
-					$HeadMarker.position = head_default_position + Vector2(direction,-1)
-				0.2:
-					$HeadMarker.position = head_default_position
-				0.3:
-					# up 1
-					$HeadMarker.position = head_default_position + Vector2(0,-1)
-				0.4:
-					# up 3
-					$HeadMarker.position = head_default_position + Vector2(0,-3)
 		else:
-			$AnimationPlayer.play("idle")
 			$HeadMarker.position = head_default_position
-			#$AnimationTree["parameters/conditions/idle"] = true
-			#$AnimationTree["parameters/conditions/is_running"] = false
-	else:
+			$HeadAnimationPlayer.play("idle")
+			$AnimationPlayer.play("idle")
+	else: # in air
+		$HeadMarker.position = head_default_position
+		$HeadAnimationPlayer.play("idle")
 		$AnimationPlayer.play("falling")
-		#$AnimationTree["parameters/conditions/not_falling"] = false
-		#$AnimationTree.get("parameters/playback").travel("falling")
 		
 	if Input.is_action_just_pressed("bite"):
-		print("bite")
+		is_biting = true
 		$HeadAnimationPlayer.stop()
 		$HeadAnimationPlayer.play("bite")
+
+func _on_head_animation_player_animation_finished(anim_name):
+	match anim_name:
+		"bite":
+			is_biting = false
