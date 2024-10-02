@@ -7,29 +7,43 @@ extends Actor
 #@onready var animation_tree : Animation 
 
 var feathers := 1 # should be set in some global var later
+var can_jump := true
 var can_double_jump := (feathers > 2)
 var can_triple_jump := (feathers > 3)
 var direction
 var prev_direction
 var head_default_position
 var is_biting := false
+var coyote_time:= 0.1
 
 func _ready():
 	$AnimationTree.active = true
 	head_default_position = $HeadMarker.position
+	var currentLevel := get_parent()
+	if "cameraBottomLimit" in currentLevel:
+		$Camera2D.limit_bottom = currentLevel.cameraBottomLimit
+	if "cameraRightLimit" in currentLevel:
+		$Camera2D.limit_right = currentLevel.cameraRightLimit
 
 func _physics_process(delta):
-	# gravity
+	# GRAVITY
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else:
+		if can_jump:
+			if $Coyote_Timer.is_stopped():
+				$Coyote_Timer.start(coyote_time)
+				#get_tree().create_timer(coyote_time).timeout.connect(coyote_timeout)
+	else: # on floor
+		can_jump = true
 		can_double_jump = (feathers > 2)
 		can_triple_jump = (feathers > 3)
+		$Coyote_Timer.stop()
 
 	# JUMP
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor(): # basic jump
+		if can_jump: # basic jump
 			velocity.y = -abs(jump_velocity)
+			can_jump = false
 		else:
 			if can_double_jump: # double jump
 				velocity.y = -abs(jump_velocity)
@@ -58,6 +72,9 @@ func _physics_process(delta):
 			velocity.x = lerp(velocity.x, 0.0, air_friction)
 	update_animation_parameters()
 	move_and_slide()
+
+func coyote_timeout():
+	can_jump = false
 
 func update_animation_parameters():
 	if is_on_floor():
@@ -93,10 +110,15 @@ func update_animation_parameters():
 						# up 3
 						$HeadMarker.position = head_default_position + Vector2(0,-3)
 			$AnimationPlayer.play("run")
-		else:
-			$HeadMarker.position = head_default_position
-			$HeadAnimationPlayer.play("idle")
-			$AnimationPlayer.play("idle")
+		else: # not moving
+			if not is_biting:
+				$HeadMarker.position = head_default_position
+				$HeadAnimationPlayer.play("idle")
+				$AnimationPlayer.play("idle")
+			else:
+				$HeadMarker.position = head_default_position
+				$HeadAnimationPlayer.play("bite")
+				$AnimationPlayer.play("idle")
 	else: # in air
 		$HeadMarker.position = head_default_position
 		$HeadAnimationPlayer.play("idle")
