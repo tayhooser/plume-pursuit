@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="spirit platformer"
-run/main_scene="res://base_level.tscn"
+config/name="Plume Pursuit"
+run/main_scene="res://level1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://common/icon.png"
+
+[debug]
+
+settings/main_scene="res://base_level.tscn"
 
 [display]
 

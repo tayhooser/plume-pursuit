@@ -3,6 +3,7 @@ extends Actor
 @export var acceleration: float = .1
 @export var ground_friction: float = .3
 @export var air_friction: float = .15
+@export var jump_buffer_time: float = .1
 
 #@onready var animation_tree : Animation 
 
@@ -10,11 +11,13 @@ var feathers := 1 # should be set in some global var later
 var can_jump := true
 var can_double_jump := (feathers > 2)
 var can_triple_jump := (feathers > 3)
-var direction
-var prev_direction
+var coyote_time := 0.1
+var jump_buffer := false
+
+var direction: int = 0
+var prev_direction: int = 0
 var head_default_position
 var is_biting := false
-var coyote_time:= 0.1
 
 func _ready():
 	$AnimationTree.active = true
@@ -32,20 +35,25 @@ func _physics_process(delta):
 		if can_jump:
 			if $Coyote_Timer.is_stopped():
 				$Coyote_Timer.start(coyote_time)
-				#get_tree().create_timer(coyote_time).timeout.connect(coyote_timeout)
-	else: # on floor
+	else:
 		can_jump = true
 		can_double_jump = (feathers > 2)
 		can_triple_jump = (feathers > 3)
 		$Coyote_Timer.stop()
+		if jump_buffer:
+			velocity.y = -abs(jump_velocity)
+			can_jump = false
+			jump_buffer = false
 
 	# JUMP
 	if Input.is_action_just_pressed("jump"):
-		if can_jump: # basic jump
+		if can_jump:
 			velocity.y = -abs(jump_velocity)
 			can_jump = false
 		else:
-			if can_double_jump: # double jump
+			jump_buffer = true
+			get_tree().create_timer(jump_buffer_time).timeout.connect(jump_buffer_timeout)
+			if can_double_jump:
 				velocity.y = -abs(jump_velocity)
 				can_double_jump = false
 			elif can_triple_jump:
@@ -55,16 +63,13 @@ func _physics_process(delta):
 		velocity.y *= .25
 	
 	# DIRECTIONAL MOVEMENT
-	prev_direction = direction
-	direction = Input.get_axis("left", "right")
+	if direction != 0:
+		prev_direction = direction
+	direction = int(Input.get_axis("left", "right"))
 	if direction: # if pressing movement buttons
 		velocity.x = lerp(velocity.x, direction * max_speed, acceleration)
-		if direction != prev_direction and direction > 0:
-			$Marker2D.scale.x = 1 # flip body
-			$HeadMarker.scale.x = 1 # flip head
-		elif direction != prev_direction and direction < 0:
-			$Marker2D.scale.x = -1
-			$HeadMarker.scale.x = -1
+		if direction == -(prev_direction) and direction != 0:
+			scale.x *= -1
 	else:
 		if is_on_floor():
 			velocity.x = lerp(velocity.x, 0.0, ground_friction)
@@ -75,6 +80,9 @@ func _physics_process(delta):
 
 func coyote_timeout():
 	can_jump = false
+
+func jump_buffer_timeout():
+	jump_buffer = false
 
 func update_animation_parameters():
 	if is_on_floor():

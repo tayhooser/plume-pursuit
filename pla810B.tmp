@@ -200,10 +200,12 @@ _data = {
 
 [node name="Player" instance=ExtResource("1_8p15k")]
 script = ExtResource("2_siryp")
-acceleration = 0.1
-ground_friction = 0.3
-air_friction = 0.15
-jump_buffer_time = 0.1
+acceleration = null
+ground_friction = null
+air_friction = null
+jump_buffer_time = null
+max_speed = null
+jump_velocity = null
 
 [node name="HeadMarker" type="Marker2D" parent="." index="0"]
 position = Vector2(0, -3)
