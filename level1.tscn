@@ -3093,9 +3093,9 @@ metadata/_edit_vertical_guides_ = [1744.0]
 metadata/_edit_horizontal_guides_ = [335.0]
 
 [node name="x jump" type="Label" parent="."]
-offset_left = 290.0
+offset_left = 289.0
 offset_top = 270.0
-offset_right = 434.0
+offset_right = 445.0
 offset_bottom = 293.0
 theme_override_fonts/font = ExtResource("3_uie12")
 text = "max x jump dist. ---------"

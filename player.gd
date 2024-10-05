@@ -88,33 +88,28 @@ func update_animation_parameters():
 	if is_on_floor():
 		if direction:
 			if not is_biting:
-				# bug: head sprite is off by 1 when running?
-				$HeadMarker.position = head_default_position + Vector2(-direction, 0)
+				$HeadMarker.position = head_default_position + Vector2(-1, 0)
 				$HeadAnimationPlayer.play("head_run")
 				# sync up with body
 				var current_frame = $AnimationPlayer.current_animation_position
 				$HeadAnimationPlayer.seek(current_frame)
 			else:
+				# sync bite animation with body
+				# BUG: not synced properly, outline sometimes gets fucked
 				var current_frame = $AnimationPlayer.current_animation_position
-				#print(typeof(floor(current_frame * 10.0)))
 				match int(floor(current_frame * 10.0)):
 					0:
 						# up 2 right 1
-						print(0)
 						$HeadMarker.position = head_default_position + Vector2(direction,-2)
 					1:
-						print(1)
 						# up 1 right 1
 						$HeadMarker.position = head_default_position + Vector2(direction,-1)
 					2:
-						print(2)
 						$HeadMarker.position = head_default_position
 					3:
-						print(3)
 						# up 1
 						$HeadMarker.position = head_default_position + Vector2(0,-1)
 					4:
-						print(4)
 						# up 3
 						$HeadMarker.position = head_default_position + Vector2(0,-3)
 			$AnimationPlayer.play("run")
