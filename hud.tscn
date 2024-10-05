@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmje66e0oaptq"]
+
+[ext_resource type="Theme" uid="uid://cij1n14rp7py" path="res://HUDtheme.tres" id="1_1j4t0"]
+[ext_resource type="Script" path="res://hud.gd" id="1_ceead"]
+
+[node name="HUD" type="Node2D"]
+script = ExtResource("1_ceead")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 104.0
+offset_bottom = 15.0
+theme = ExtResource("1_1j4t0")
+text = "test hud element"
