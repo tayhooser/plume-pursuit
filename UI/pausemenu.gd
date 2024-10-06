@@ -19,7 +19,6 @@ func _input(event):
 			pause()
 
 func _on_resume_pressed():
-	print("button pressed")
 	resume()
 
 func _on_main_menu_pressed():

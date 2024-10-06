@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Plume Pursuit"
-run/main_scene="res://mainmenu.tscn"
+run/main_scene="res://UI/mainmenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://common/icon.png"
 

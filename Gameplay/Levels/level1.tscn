@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://level1.gd" id="1_5nufl"]
 [ext_resource type="Texture2D" uid="uid://b7dwh448j5kg4" path="res://common/nature tileset/tileset_mk_16_16_nature_tileset_godot.png" id="2_n4uj6"]
-[ext_resource type="PackedScene" uid="uid://c3mol1n0qyd6r" path="res://player.tscn" id="3_s3hcs"]
+[ext_resource type="PackedScene" uid="uid://c3mol1n0qyd6r" path="res://Gameplay/Actors/player.tscn" id="3_s3hcs"]
 [ext_resource type="FontFile" uid="uid://dbptaqmq0ba3e" path="res://common/fonts/monogram.ttf" id="3_uie12"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dlmox"]

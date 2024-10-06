@@ -1,0 +1,55 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cij1n14rp7py"]
+
+[ext_resource type="FontFile" uid="uid://dbptaqmq0ba3e" path="res://common/fonts/monogram.ttf" id="1_wns1d"]
+[ext_resource type="Texture2D" uid="uid://b66x0sdm8ur88" path="res://common/ui/UI books & more.png" id="2_71h4s"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qptkf"]
+texture = ExtResource("2_71h4s")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(80, 336, 32, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_du0g2"]
+texture = ExtResource("2_71h4s")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(80, 272, 32, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xio61"]
+texture = ExtResource("2_71h4s")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(80, 336, 32, 16)
+
+[resource]
+Button/constants/h_separation = 4
+Button/fonts/font = ExtResource("1_wns1d")
+Button/styles/hover = SubResource("StyleBoxTexture_qptkf")
+Button/styles/normal = SubResource("StyleBoxTexture_du0g2")
+Button/styles/pressed = SubResource("StyleBoxTexture_xio61")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 0
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_wns1d")
+Label/styles/normal = null
