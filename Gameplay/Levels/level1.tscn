@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dma7unn6s3pws"]
 
-[ext_resource type="Script" path="res://level1.gd" id="1_5nufl"]
+[ext_resource type="Script" path="res://gameplay/levels/level1.gd" id="1_rgnen"]
 [ext_resource type="Texture2D" uid="uid://b7dwh448j5kg4" path="res://common/nature tileset/tileset_mk_16_16_nature_tileset_godot.png" id="2_n4uj6"]
 [ext_resource type="PackedScene" uid="uid://c3mol1n0qyd6r" path="res://Gameplay/Actors/player.tscn" id="3_s3hcs"]
 [ext_resource type="FontFile" uid="uid://dbptaqmq0ba3e" path="res://common/fonts/monogram.ttf" id="3_uie12"]
@@ -3088,7 +3088,7 @@ terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_krsdp")
 
 [node name="level 1" type="Node2D"]
-script = ExtResource("1_5nufl")
+script = ExtResource("1_rgnen")
 metadata/_edit_vertical_guides_ = [1744.0]
 metadata/_edit_horizontal_guides_ = [335.0]
 

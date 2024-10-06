@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://c3mol1n0qyd6r"]
 
 [ext_resource type="PackedScene" uid="uid://d10mbmyuev2py" path="res://Gameplay/Actors/actor.tscn" id="1_8p15k"]
-[ext_resource type="Script" path="res://player.gd" id="2_siryp"]
+[ext_resource type="Script" path="res://gameplay/actors/player.gd" id="2_2qxy4"]
 [ext_resource type="Texture2D" uid="uid://cngt7y11xbw86" path="res://common/HEAD SPRITESHEET.png" id="3_30ryd"]
 [ext_resource type="Texture2D" uid="uid://b3d581ndg41sh" path="res://common/BODY SPRITESHEET.png" id="3_536ow"]
 
@@ -199,7 +199,7 @@ _data = {
 }
 
 [node name="Player" instance=ExtResource("1_8p15k")]
-script = ExtResource("2_siryp")
+script = ExtResource("2_2qxy4")
 acceleration = 0.1
 ground_friction = 0.3
 air_friction = 0.15

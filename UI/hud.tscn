@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmje66e0oaptq"]
 
-[ext_resource type="Theme" uid="uid://cij1n14rp7py" path="res://HUDtheme.tres" id="1_1j4t0"]
-[ext_resource type="Script" path="res://hud.gd" id="1_ceead"]
+[ext_resource type="Theme" uid="uid://cij1n14rp7py" path="res://UI/HUDtheme.tres" id="1_1j4t0"]
+[ext_resource type="Script" path="res://ui/hud.gd" id="1_pdijr"]
 
 [node name="HUD" type="Node2D"]
-script = ExtResource("1_ceead")
+script = ExtResource("1_pdijr")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 8.0

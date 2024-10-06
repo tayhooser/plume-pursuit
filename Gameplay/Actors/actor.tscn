@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://d10mbmyuev2py"]
 
-[ext_resource type="Script" path="res://actor.gd" id="1_kuvtx"]
+[ext_resource type="Script" path="res://gameplay/actors/actor.gd" id="1_52wi4"]
 
 [node name="Actor" type="CharacterBody2D"]
-script = ExtResource("1_kuvtx")
+script = ExtResource("1_52wi4")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 

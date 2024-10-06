@@ -19,10 +19,11 @@ func _input(event):
 			pause()
 
 func _on_resume_pressed():
+	print("button pressed")
 	resume()
 
 func _on_main_menu_pressed():
-	get_tree().change_scene_to_file("res://mainmenu.tscn")
+	get_tree().change_scene_to_file("res://ui/mainmenu.tscn")
 
 func _on_quit_pressed():
 	get_tree().quit()

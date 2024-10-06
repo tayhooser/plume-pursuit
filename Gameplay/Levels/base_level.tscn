@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bklrlhpacf11l"]
 
-[ext_resource type="Script" path="res://base_level.gd" id="1_8yrq7"]
+[ext_resource type="Script" path="res://gameplay/levels/base_level.gd" id="1_s4h1j"]
 
 [node name="BaseLevel" type="Node2D"]
-script = ExtResource("1_8yrq7")
+script = ExtResource("1_s4h1j")
 metadata/_edit_horizontal_guides_ = [288.0, 286.0]
 metadata/_edit_vertical_guides_ = [845.0, 828.0, 828.0]

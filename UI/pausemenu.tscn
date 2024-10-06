@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c6h7o3o5bg0in"]
 
-[ext_resource type="Script" path="res://pausemenu.gd" id="1_4nhdx"]
+[ext_resource type="Script" path="res://ui/pausemenu.gd" id="1_6n5os"]
 [ext_resource type="TileSet" uid="uid://dw17lisxa37fd" path="res://common/ui/notebook.tres" id="1_kgi5d"]
 [ext_resource type="Theme" uid="uid://cij1n14rp7py" path="res://UI/HUDtheme.tres" id="2_3wt6w"]
 
@@ -157,7 +157,7 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 grow_vertical = 2
 size_flags_horizontal = 0
-script = ExtResource("1_4nhdx")
+script = ExtResource("1_6n5os")
 metadata/_edit_horizontal_guides_ = [324.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
