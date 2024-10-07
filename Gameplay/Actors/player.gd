@@ -5,12 +5,13 @@ extends Actor
 @export var air_friction: float = .15
 @export var jump_buffer_time: float = .1
 
-#@onready var animation_tree : Animation 
-
-var feathers := 1 # should be set in some global var later
+var feathers := 0
 var can_jump := true
-var can_double_jump := (feathers > 2)
-var can_triple_jump := (feathers > 3)
+var can_double_jump := false
+var can_triple_jump := false
+var double_jump_feather_req := 1
+var triple_jump_feather_req := 2
+
 var coyote_time := 0.1
 var jump_buffer := false
 
@@ -27,8 +28,13 @@ func _ready():
 		$Camera2D.limit_bottom = currentLevel.cameraBottomLimit
 	if "cameraRightLimit" in currentLevel:
 		$Camera2D.limit_right = currentLevel.cameraRightLimit
+	
+	feathers = get_parent().get_parent().feathers
+	can_double_jump = (feathers >= double_jump_feather_req)
+	can_triple_jump = (feathers >= triple_jump_feather_req)
 
 func _physics_process(delta):
+	feathers = get_parent().get_parent().feathers
 	# GRAVITY
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -37,8 +43,8 @@ func _physics_process(delta):
 				$Coyote_Timer.start(coyote_time)
 	else:
 		can_jump = true
-		can_double_jump = (feathers > 2)
-		can_triple_jump = (feathers > 3)
+		can_double_jump = (feathers >= double_jump_feather_req)
+		can_triple_jump = (feathers >= triple_jump_feather_req)
 		$Coyote_Timer.stop()
 		if jump_buffer:
 			velocity.y = -abs(jump_velocity)
@@ -59,8 +65,10 @@ func _physics_process(delta):
 			elif can_triple_jump:
 				velocity.y = -abs(jump_velocity)
 				can_triple_jump = false
-	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
-		velocity.y *= .25
+				
+	# below code is if you want holding jump to make you jump farther
+	#if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
+		#velocity.y *= .25
 	
 	# DIRECTIONAL MOVEMENT
 	if direction != 0:
