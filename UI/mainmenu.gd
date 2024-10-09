@@ -1,15 +1,18 @@
 extends Control
 
+var viewport_size : Vector2
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	viewport_size = get_viewport().get_visible_rect().size
+	var offset = -5
+	
+	# set y to middle of screen
+	$VBoxContainer.position.y = (viewport_size.y - offset) / 2
+	$VBoxContainer/PlayButton.grab_focus()
+	
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
 
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file("res://Gameplay/gameplay.tscn")

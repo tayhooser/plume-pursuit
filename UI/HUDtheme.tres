@@ -1,7 +1,19 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cij1n14rp7py"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://cij1n14rp7py"]
 
 [ext_resource type="FontFile" uid="uid://dbptaqmq0ba3e" path="res://common/fonts/monogram.ttf" id="1_wns1d"]
 [ext_resource type="Texture2D" uid="uid://b66x0sdm8ur88" path="res://common/ui/UI books & more.png" id="2_71h4s"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xcum2"]
+texture = ExtResource("2_71h4s")
+texture_margin_left = 4.0
+texture_margin_top = 5.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+expand_margin_left = 5.0
+expand_margin_top = 3.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+region_rect = Rect2(642, 322, 12, 13)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qptkf"]
 texture = ExtResource("2_71h4s")
@@ -36,9 +48,40 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 region_rect = Rect2(80, 336, 32, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbnm2"]
+atlas = ExtResource("2_71h4s")
+region = Rect2(801, 180, 14, 9)
+margin = Rect2(2, 2, 0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_45ka5"]
+texture = ExtResource("2_71h4s")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(16, 272, 32, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xu5wu"]
+texture = ExtResource("2_71h4s")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(786, 226, 12, 12)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xh2ul"]
+texture = ExtResource("2_71h4s")
+region_rect = Rect2(786, 226, 12, 12)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wbtsq"]
+texture = ExtResource("2_71h4s")
+region_rect = Rect2(786, 210, 12, 12)
+
 [resource]
+Button/colors/font_color = Color(0.775064, 0.775063, 0.775063, 1)
 Button/constants/h_separation = 4
 Button/fonts/font = ExtResource("1_wns1d")
+Button/styles/focus = SubResource("StyleBoxTexture_xcum2")
 Button/styles/hover = SubResource("StyleBoxTexture_qptkf")
 Button/styles/normal = SubResource("StyleBoxTexture_du0g2")
 Button/styles/pressed = SubResource("StyleBoxTexture_xio61")
@@ -53,3 +96,13 @@ Label/constants/shadow_outline_size = 0
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_wns1d")
 Label/styles/normal = null
+OptionButton/fonts/font = ExtResource("1_wns1d")
+OptionButton/icons/arrow = SubResource("AtlasTexture_lbnm2")
+PopupMenu/colors/font_color = Color(0.188235, 0.219608, 0.262745, 1)
+PopupMenu/fonts/font = ExtResource("1_wns1d")
+PopupMenu/styles/panel = SubResource("StyleBoxTexture_45ka5")
+XButton/base_type = &"Button"
+XButton/styles/focus = null
+XButton/styles/hover = SubResource("StyleBoxTexture_xu5wu")
+XButton/styles/normal = SubResource("StyleBoxTexture_xh2ul")
+XButton/styles/pressed = SubResource("StyleBoxTexture_wbtsq")

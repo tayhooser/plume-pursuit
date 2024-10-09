@@ -132,8 +132,11 @@ func update_animation_parameters():
 				$AnimationPlayer.play("idle")
 	else: # in air
 		$HeadMarker.position = head_default_position
-		$HeadAnimationPlayer.play("idle")
 		$AnimationPlayer.play("falling")
+		if is_biting:
+			$HeadAnimationPlayer.play("bite")
+		else:
+			$HeadAnimationPlayer.play("idle")
 		
 	if Input.is_action_just_pressed("bite"):
 		is_biting = true
