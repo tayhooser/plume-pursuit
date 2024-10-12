@@ -92,7 +92,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fppp4"]
-size = Vector2(14, 20)
+size = Vector2(16, 20)
 
 [node name="Feather" type="Area2D"]
 script = ExtResource("1_pt6cf")

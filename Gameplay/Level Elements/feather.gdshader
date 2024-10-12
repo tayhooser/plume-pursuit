@@ -22,5 +22,7 @@ void fragment(){
 	
 	vec4 rainbow_color = vec4(r, g, b, 1.0);
     vec4 final_color = mix(sprite_color, rainbow_color, clamp(alpha, 0.0, 1.0));
-	COLOR = vec4(final_color.rgb, clamp(abs(alpha) + sprite_color.a, 0.0, 1.0));
+	//COLOR = vec4(final_color.rgb, clamp(abs(alpha) + sprite_color.a, 0.0, 1.0));
+	vec4 color_with_alpha = vec4(final_color.rgb, clamp(abs(alpha) + sprite_color.a, 0.0, 1.0));
+    COLOR = color_with_alpha;
 }

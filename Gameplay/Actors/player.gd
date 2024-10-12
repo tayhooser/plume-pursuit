@@ -76,7 +76,8 @@ func _physics_process(delta):
 	direction = int(Input.get_axis("left", "right"))
 	if direction: # if pressing movement buttons
 		velocity.x = lerp(velocity.x, direction * max_speed, acceleration)
-		if direction == -(prev_direction) and direction != 0:
+		#if direction == -(prev_direction) and direction != 0:
+		if (direction > 0 and prev_direction < 0) or (direction < 0 and prev_direction >= 0):
 			scale.x *= -1
 	else:
 		if is_on_floor():

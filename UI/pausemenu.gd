@@ -49,7 +49,7 @@ func _on_main_menu_pressed():
 func _on_quit_pressed():
 	get_tree().quit()
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	if not get_tree().paused:
 		visible = false
 		

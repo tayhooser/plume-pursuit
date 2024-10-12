@@ -1,13 +1,12 @@
 extends Node2D
 
+var playerNode
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	playerNode = get_parent().get_parent().get_node("level 1").get_node("Player")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	#var playerNode = get_parent().get_node("Player")
-	#$Label.text = "" + playerNode
+	$Label.text = "direction: " + str(playerNode.direction) + "\nprev direction: " + str(playerNode.prev_direction)
 	pass
